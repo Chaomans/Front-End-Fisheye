@@ -49,7 +49,7 @@ function photographerTemplate(data) {
     infos.appendChild(pricePerDay);
 
     article.addEventListener("click", (e) => {
-      window.location.href = `/photographer.html?id=${id}`;
+      window.location.href = `./photographer.html?id=${id}`;
     });
 
     return article;
