@@ -1,3 +1,6 @@
+import { photographerTemplate } from "../templates/photographer.js";
+import { getPhotographers } from "../utils/getPhotographers.js";
+
 async function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 

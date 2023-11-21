@@ -1,4 +1,4 @@
-function photographerTemplate(data) {
+export function photographerTemplate(data) {
   const { name, portrait, id, city, country, tagline, price } = data;
 
   const picture = `assets/photographers/Photographers_ID_Photos/${portrait}`;
@@ -9,6 +9,7 @@ function photographerTemplate(data) {
     // article
     const article = document.createElement("article");
     article.title = `Voir la page de ${name}`;
+    article.setAttribute("tabindex", "0");
 
     // img
     const portraitContainer = document.createElement("div");
@@ -39,7 +40,7 @@ function photographerTemplate(data) {
     pricePerDay.classList.add("price");
     pricePerDay.innerHTML = `${price}€/jour`;
 
-    /* CONTRUCTION */
+    /* CONSTRUCTION */
     article.appendChild(portraitContainer);
     portraitContainer.appendChild(img);
     article.appendChild(h2);
@@ -49,8 +50,13 @@ function photographerTemplate(data) {
     infos.appendChild(pricePerDay);
 
     article.addEventListener("click", (e) => {
-      const baseURL = "https://chaomans.github.io/Front-End-Fisheye/";
-      window.location.href = `${baseURL}/photographer.html?id=${id}`;
+      // const baseURL = "https://chaomans.github.io/Front-End-Fisheye/";
+      window.location.href = `./photographer.html?id=${id}`;
+    });
+
+    article.addEventListener("keydown", (e) => {
+      if (e.key === "enter") {
+      }
     });
 
     return article;

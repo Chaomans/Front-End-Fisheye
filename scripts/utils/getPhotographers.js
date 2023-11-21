@@ -1,7 +1,7 @@
-const dataURL =
-  "https://raw.githubusercontent.com/Chaomans/Front-End-Fisheye/main/data/photographers.json";
+import { notFound } from "../templates/404.js";
+const dataURL = "/data/photographers.json";
 
-async function getPhotographers() {
+export async function getPhotographers() {
   try {
     const data = await fetch(dataURL, {
       method: "GET",
@@ -17,24 +17,24 @@ async function getPhotographers() {
   }
 }
 
-async function getOnePhotographer(id) {
+export async function getOnePhotographer(id) {
   try {
-    const data = await fetch(dataURL, {
+    const res = await fetch(dataURL, {
       method: "GET",
     });
-    if (!data.ok) {
+    if (!res.ok) {
       throw new Error("Fetch response not OK");
     }
-    const photographers = await data.json();
-    photographers.photographers = photographers.photographers.filter(
-      (p) => p.id === id
-    );
-    photographers.media = photographers.media.filter(
-      (m) => m.photographerId === id
-    );
-    return photographers;
+    const data = await res.json();
+    const photographer = data.photographers.filter((p) => p.id === id)[0] ?? {};
+    if (!photographer.hasOwnProperty("id")) {
+      notFound();
+      throw new Error(`Photographer with id ${id} does not exist`);
+    }
+    photographer.media = data.media.filter((m) => m.photographerId === id);
+    return photographer;
   } catch (error) {
     console.error(error);
-    return [];
+    return {};
   }
 }
