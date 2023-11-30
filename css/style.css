@@ -3,10 +3,12 @@
 :root {
   --text-shadow: 2px 2px 1px #cacaca;
   --img-shadow: 0px 10px 10px #a7a6a6;
+  --media-shadow: 4px 4px 4px #d4d4d4;
   --transition-shadow: all 0.15s linear;
   --secondary-color: #d3573c;
   --primary-color: #901c1c;
   --tertiary-color: #757575;
+  --arrow-size: 8px;
 }
 
 body {

@@ -1,23 +1,41 @@
 export const cardTemplate = (name, media) => {
   const card = document.createElement("div");
   card.classList.add("card");
+  card.setAttribute("tabIndex", "0");
+  card.setAttribute("id", media.id);
+  card.title = `Voir ${media.title}`;
 
   // get img src
   let imgsrc = "";
+  let isvideo = false;
   const path = `/assets/photographers/${name.split(" ")[0]}/`;
 
   if (media.hasOwnProperty("image")) {
     imgsrc = path + media.image;
   }
   if (media.hasOwnProperty("video")) {
-    imgsrc = getImgFromVideo(path + media.video);
+    imgsrc = path + media.video;
+    isvideo = true;
   }
 
   //img
   const imgContainer = document.createElement("div");
   imgContainer.classList.add("imgContainer");
-  const img = document.createElement("img");
-  img.setAttribute("src", imgsrc);
+  let img;
+  if (!isvideo) {
+    img = document.createElement("img");
+    img.setAttribute("src", imgsrc);
+  }
+  if (isvideo) {
+    img = document.createElement("video");
+    img.removeAttribute("controls");
+    img.setAttribute("width", "350px");
+    img.setAttribute("height", "350px");
+    const src = document.createElement("source");
+    src.setAttribute("src", imgsrc);
+    src.setAttribute("type", `video/${imgsrc.split(".").slice(-1)}`);
+    img.appendChild(src);
+  }
 
   const infos = document.createElement("div");
   infos.classList.add("infos");
@@ -28,26 +46,29 @@ export const cardTemplate = (name, media) => {
   likes.classList.add("likes");
   likes.innerHTML = `${media.likes} <i class="fa-solid fa-heart"></i>`;
 
-  //display
+  //construction
   card.appendChild(imgContainer);
   imgContainer.appendChild(img);
   card.appendChild(infos);
   infos.appendChild(title);
   infos.appendChild(likes);
 
-  return card;
-};
+  //events
+  card.addEventListener("keydown", (e) => {
+    if (["ArrowLeft", "ArrowUp"].includes(e.code)) {
+      card.previousElementSibling?.focus();
+    }
+    if (["ArrowRight", "ArrowDown"].includes(e.code)) {
+      card.nextElementSibling?.focus();
+    }
+    if (["Space", "Enter"].includes(e.code)) {
+      //TODO
+    }
+  });
 
-const getImgFromVideo = (path) => {
-  const video = document.createElement("video");
-  video.setAttribute("src", path);
-  const canvas = document.createElement("canvas");
-  // scale the canvas accordingly
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  console.log(video.videoWidth);
-  // draw the video at that frame
-  canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-  // convert it to a usable data URL
-  return canvas.toDataURL();
+  img.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+  });
+
+  return card;
 };

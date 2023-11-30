@@ -34,23 +34,77 @@
         <button class="contact_button">Contactez-moi</button>
         <div class="photographer-img"></div>
       </div>
-      <div class="stats">
-        <p class="likes"><i class="fa-solid fa-heart"></i></p>
-        <p class="price"></p>
-      </div>
       <div class="photographer-media">
         <div class="sort">
-          <p>Trier par</p>
-          <select name="sort" id="sort">
-            <option value="popularity">Popularité</option>
-            <option value="date">Date</option>
-            <option value="title">Titre</option>
-          </select>
+          <p class="sort-title">Trier par</p>
+          <div class="sortlist inactive" id="sortlistdiv">
+            <ul id="sortlist" tabindex="0">
+              <li tabindex="0">
+                <input
+                  type="radio"
+                  name="sortradio"
+                  id="radio1"
+                  value="popularity"
+                  checked
+                /><label for="radio1">Popularité</label>
+              </li>
+              <li tabindex="0">
+                <input
+                  type="radio"
+                  name="sortradio"
+                  id="radio2"
+                  value="date"
+                /><label for="radio2">Date</label>
+              </li>
+              <li tabindex="0">
+                <input
+                  type="radio"
+                  name="sortradio"
+                  id="radio3"
+                  value="title"
+                /><label for="radio3">Titre</label>
+              </li>
+            </ul>
+            <div class="arrows">
+              <i class="arrow">
+                <svg
+                  width="16"
+                  height="11"
+                  viewBox="0 0 16 11"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.12 0.453125L8 6.55979L1.88 0.453125L0 2.33312L8 10.3331L16 2.33312L14.12 0.453125Z"
+                    fill="white"
+                  />
+                </svg>
+              </i>
+              <i class="arrow hidden">
+                <svg
+                  width="16"
+                  height="11"
+                  viewBox="0 0 16 11"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.88 10.5469L8 4.44021L14.12 10.5469L16 8.66688L8 0.666874L1.64355e-07 8.66687L1.88 10.5469Z"
+                    fill="white"
+                  />
+                </svg>
+              </i>
+            </div>
+          </div>
         </div>
         <div class="media"></div>
+        <div class="stats">
+          <p class="likes"><i class="fa-solid fa-heart"></i></p>
+          <p class="price"></p>
+        </div>
       </div>
     </main>
-    <div id="contact_modal">
+    <div id="contact_modal" class="hidden">
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>

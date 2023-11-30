@@ -55,7 +55,8 @@ export function photographerTemplate(data) {
     });
 
     article.addEventListener("keydown", (e) => {
-      if (e.key === "enter") {
+      if (e.code === "Enter") {
+        article.click();
       }
     });
 

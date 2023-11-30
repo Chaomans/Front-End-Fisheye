@@ -15,6 +15,52 @@ closeImg.addEventListener("click", () => {
   closeModal();
 });
 
+const sortInputs = document.querySelectorAll("input[name='sortradio']");
+
+sortInputs.forEach((inp) => {
+  inp.addEventListener("change", (e) => {
+    Array.from(sortlist.getElementsByTagName("li"))
+      .sort((a, b) => {
+        if (a.firstElementChild.checked) return -1;
+        if (b.firstElementChild.checked) return 1;
+        return 0;
+      })
+      .forEach((li) => {
+        sortlist.appendChild(li);
+      });
+    const selected = document.querySelector("input:checked");
+    sortMedia(selected.value);
+  });
+
+  inp.addEventListener("click", () => {
+    toggleSelect();
+  });
+});
+
+const listitems = document.querySelectorAll("li");
+
+listitems.forEach((li) => {
+  li.addEventListener("keydown", (e) => {
+    if (["ArrowLeft", "ArrowUp"].includes(e.code)) {
+      li.previousElementSibling?.focus();
+    }
+    if (["ArrowRight", "ArrowDown"].includes(e.code)) {
+      li.nextElementSibling?.focus();
+    }
+    if (["Space", "Enter"].includes(e.code)) {
+      //TODO
+    }
+  });
+});
+
+const toggleSelect = () => {
+  sortlistdiv.classList.toggle("inactive");
+  const arrows = document.querySelectorAll(".arrow");
+  arrows.forEach((elem) => elem.classList.toggle("hidden"));
+};
+
+const mediaArray = [];
+
 async function displayData({
   name,
   city,
@@ -24,6 +70,9 @@ async function displayData({
   portrait,
   media,
 }) {
+  //store media
+  mediaArray.push(...media);
+
   //name
   const h2 = document.querySelector(".name");
   h2.innerHTML = name;
@@ -56,11 +105,34 @@ async function displayData({
 
   //all media
   const mediaContainer = document.querySelector(".media");
-  media.forEach((m) => {
-    const card = cardTemplate(name, m);
-    mediaContainer.appendChild(card);
-  });
+  media
+    .sort((a, b) => b.likes - a.likes)
+    .forEach((m) => {
+      const card = cardTemplate(name, m);
+      mediaContainer.appendChild(card);
+    });
 }
+
+const sortMedia = (filterValue) => {
+  const mediaContainer = document.querySelector(".media");
+  const media = Array.from(document.querySelectorAll(".card"));
+  mediaArray
+    .sort((a, b) => {
+      switch (filterValue) {
+        case "popularity":
+          return b.likes - a.likes;
+        case "date":
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateA - dateB;
+        case "title":
+          return a.title.localeCompare(b.title);
+      }
+    })
+    .forEach((m) => {
+      mediaContainer.appendChild(media.filter((card) => +card.id === m.id)[0]);
+    });
+};
 
 async function init() {
   // Récupère les datas des photographes
