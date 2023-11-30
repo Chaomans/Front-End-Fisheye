@@ -115,3 +115,21 @@ h1 {
   font-size: 9px;
   color: var(--tertiary-color);
 }
+
+.notFound,
+.notFoundMsg {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notFound {
+  font-size: 15rem;
+  color: var(--primary-color);
+  text-shadow: var(--text-shadow);
+}
+
+.notFoundMsg {
+  font-size: 2rem;
+}

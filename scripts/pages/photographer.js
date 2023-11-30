@@ -90,7 +90,7 @@ async function displayData({
   const img = document.createElement("img");
   img.setAttribute(
     "src",
-    `/assets/photographers/Photographers_ID_Photos/${portrait}`
+    `assets/photographers/Photographers_ID_Photos/${portrait}`
   );
   imgdiv.appendChild(img);
 
@@ -137,7 +137,6 @@ const sortMedia = (filterValue) => {
 async function init() {
   // Récupère les datas des photographes
   const photographer = await getOnePhotographer(+id);
-  console.log(photographer);
   if (Object.keys(photographer).length != 0) {
     displayData(photographer);
   }
