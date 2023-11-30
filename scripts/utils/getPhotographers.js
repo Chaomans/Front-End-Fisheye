@@ -1,5 +1,5 @@
 import { notFound } from "../templates/404.js";
-const dataURL = "/data/photographers.json";
+const dataURL = "./data/photographers.json";
 
 export async function getPhotographers() {
   try {

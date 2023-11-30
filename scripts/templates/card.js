@@ -8,7 +8,7 @@ export const cardTemplate = (name, media) => {
   // get img src
   let imgsrc = "";
   let isvideo = false;
-  const path = `/assets/photographers/${name.split(" ")[0]}/`;
+  const path = `./assets/photographers/${name.split(" ")[0]}/`;
 
   if (media.hasOwnProperty("image")) {
     imgsrc = path + media.image;
