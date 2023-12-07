@@ -34,12 +34,7 @@ export class Lightbox {
 
     // event
     const close = document.querySelector(".lightbox_close");
-    close.addEventListener("click", () => {
-      lightbox.classList.add("fadeOut");
-      setTimeout(() => {
-        lightbox.remove();
-      }, 500);
-    });
+    close.addEventListener("click", () => this.close(lightbox));
 
     const next = document.querySelector(".lightbox_next");
     next.addEventListener("click", () => {
@@ -50,6 +45,34 @@ export class Lightbox {
     prev.addEventListener("click", () => {
       this.prev();
     });
+
+    window.addEventListener("keyup", (e) => {
+      this.onKeyUp(e, lightbox);
+    });
+  }
+
+  /**
+   *
+   * @param {HTMLDivElement} lightbox
+   */
+  close(lightbox) {
+    lightbox.classList.add("fadeOut");
+    setTimeout(() => {
+      lightbox.remove();
+      document.removeEventListener("keyup", this.onKeyUp);
+    }, 500);
+  }
+
+  onKeyUp(e, lightbox) {
+    if (e.code === "Escape") {
+      this.close(lightbox);
+    }
+    if (e.code === "ArrowRight") {
+      this.next();
+    }
+    if (e.code === "ArrowLeft") {
+      this.prev();
+    }
   }
 
   loadVideo(src) {
