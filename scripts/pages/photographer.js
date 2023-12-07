@@ -76,6 +76,7 @@ async function displayData({
   //name
   const h2 = document.querySelector(".name");
   h2.innerHTML = name;
+  contactName.innerHTML = name;
 
   //location
   const location = document.querySelector(".location");
@@ -133,6 +134,104 @@ const sortMedia = (filterValue) => {
       mediaContainer.appendChild(media.filter((card) => +card.id === m.id)[0]);
     });
 };
+
+const formfields = [
+  ...document.querySelectorAll(".formData input"),
+  document.querySelector("textarea"),
+];
+const formDataAll = document.querySelectorAll(".formData");
+const errorMessage = (id) => {
+  switch (id) {
+    case "firstname":
+      return "Au moins deux charactères";
+    case "lastname":
+      return "Au moins deux charactères";
+    case "email":
+      return "exemple: 'dupont.jean@mail.com'.";
+    case "message":
+      return "Au moins 20 charactères";
+    default:
+      return "not valid.";
+  }
+};
+
+// validation function
+const isValid = (toValidate, value) => {
+  switch (toValidate) {
+    case "firstname":
+      // at least 2 letters
+      return value.replace(/[- ]/g, "").length >= 2;
+    case "lastname":
+      // at least 2 letters
+      return value.replace(/[- ]/g, "").length >= 2;
+    case "email":
+      const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      if (!regex.test(value)) return false;
+
+      // avoiding nonsense ---@--.--
+      let isEmail = true;
+      const emailParts = [
+        value.split("@")[0] ?? "",
+        ...(value?.split("@")[1].split(".") ?? ""),
+      ];
+      emailParts.forEach((part) => {
+        if (!/[a-z0-9]/i.test(part)) isEmail = false;
+      });
+      return isEmail;
+    case "message":
+      return value.replace(/[- ]/g, "").length >= 20;
+    case "data":
+      for (const [k, v] of value.entries()) {
+        if (!isValid(k, v)) return false;
+      }
+      return true;
+    default:
+      break;
+  }
+};
+
+// Display message if invalid
+const invalid = (i, msg) => {
+  formDataAll[i].setAttribute("data-error", msg);
+  formDataAll[i].setAttribute("data-error-visible", "true");
+};
+
+// Remove error message if valid
+const valid = (i) => {
+  formDataAll[i].removeAttribute("data-error");
+  formDataAll[i].removeAttribute("data-error-visible");
+};
+
+const sendBtn = document.querySelector(".send");
+
+formfields.forEach((elem, i) => {
+  elem.addEventListener("change", (e) => {
+    const btn = document.querySelector(".send");
+    if (!isValid(e.target.id, e.target.value)) {
+      invalid(i, errorMessage(e.target.id));
+      btn.disabled = true;
+      return;
+    }
+    valid(i);
+    const data = new FormData(contactForm, sendBtn);
+    if (isValid("data", data)) {
+      btn.disabled = false;
+    }
+  });
+});
+
+sendBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const data = new FormData(contactForm, sendBtn);
+  if (!isValid("data", data)) return;
+  console.log("Data send:");
+  for (const [k, v] of data.entries()) {
+    console.log(`${k}: ${v}`);
+  }
+  contactForm.reset();
+  sendBtn.disabled = true;
+  closeModal();
+});
 
 async function init() {
   // Récupère les datas des photographes

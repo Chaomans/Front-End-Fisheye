@@ -107,15 +107,37 @@
     <div id="contact_modal" class="hidden">
       <div class="modal">
         <header>
-          <h2>Contactez-moi</h2>
+          <h2>Contactez-moi<br /><span id="contactName"></span></h2>
           <img src="assets/icons/close.svg" />
         </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
+        <form id="contactForm" name="contact" action="#">
+          <div class="formData">
+            <label for="firstname">Prénom</label>
+            <input
+              id="firstname"
+              name="firstname"
+              type="text"
+              class="text-control"
+            />
           </div>
-          <button class="contact_button">Envoyer</button>
+          <div class="formData">
+            <label for="lastname">Nom</label>
+            <input
+              id="lastname"
+              name="lastname"
+              type="text"
+              class="text-control"
+            />
+          </div>
+          <div class="formData">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" class="text-control" />
+          </div>
+          <div class="formData">
+            <label for="message">Votre message</label>
+            <textarea name="message" id="message" rows="5"></textarea>
+          </div>
+          <button class="contact_button send" disabled>Envoyer</button>
         </form>
       </div>
     </div>

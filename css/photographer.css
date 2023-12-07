@@ -25,6 +25,11 @@
   transition: all 0.15s;
 }
 
+.contact_button.send:disabled {
+  background-color: #a3a3a3;
+  color: #333;
+}
+
 .contact_button:hover,
 .contact_button:focus {
   background-color: var(--secondary-color);
@@ -35,6 +40,7 @@
   border-radius: 5px;
   background-color: #db8876;
   width: 50%;
+  max-width: 670px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,16 +52,17 @@
 .modal header {
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .modal header img {
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .modal header h2 {
   font-size: 64px;
   font-weight: normal;
-  text-align: center;
 }
 
 form {
@@ -68,6 +75,7 @@ form {
 form label {
   color: #312e2e;
   font-size: 36px;
+  margin-bottom: 5px;
 }
 
 form div {
@@ -78,11 +86,15 @@ form div {
   margin-bottom: 26px;
 }
 
-form input {
+form input,
+form textarea {
   width: 100%;
   height: 68px;
   border: none;
   border-radius: 5px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .photograph-header .photographer {
@@ -373,4 +385,27 @@ div#contact_modal.hidden {
 
 .hidden {
   display: none;
+}
+
+form textarea {
+  resize: none;
+  height: 170px;
+}
+
+.formData[data-error]::after {
+  content: attr(data-error);
+  font-size: 18px;
+  color: var(--primary-color);
+  display: block;
+  margin-top: 7px;
+  text-align: right;
+  line-height: 10px;
+  opacity: 0;
+  transition: 0.3s;
+}
+.formData[data-error-visible="true"]::after {
+  opacity: 1;
+}
+.formData[data-error-visible="true"] .text-control {
+  border: 2px solid var(--primary-color);
 }
