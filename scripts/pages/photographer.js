@@ -1,6 +1,7 @@
 import { getOnePhotographer } from "../utils/getPhotographers.js";
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import { cardTemplate } from "../templates/card.js";
+import { Lightbox } from "../utils/lightbox.js";
 
 const params = new URLSearchParams(document.location.search);
 const id = params.get("id");
@@ -238,6 +239,7 @@ async function init() {
   const photographer = await getOnePhotographer(+id);
   if (Object.keys(photographer).length != 0) {
     displayData(photographer);
+    Lightbox.init();
   }
 }
 
