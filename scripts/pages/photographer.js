@@ -3,9 +3,6 @@ import { displayModal, closeModal } from "../utils/contactForm.js";
 import { cardTemplate } from "../templates/card.js";
 import { Lightbox } from "../utils/lightbox.js";
 
-const params = new URLSearchParams(document.location.search);
-const id = params.get("id");
-
 const contactButton = document.querySelector(".contact_button");
 contactButton.addEventListener("click", () => {
   displayModal();
@@ -235,6 +232,8 @@ sendBtn.addEventListener("click", (e) => {
 });
 
 async function init() {
+  const params = new URLSearchParams(document.location.search);
+  const id = params.get("id");
   // Récupère les datas des photographes
   const photographer = await getOnePhotographer(+id);
   if (Object.keys(photographer).length != 0) {
