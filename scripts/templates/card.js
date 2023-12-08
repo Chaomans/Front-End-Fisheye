@@ -3,7 +3,6 @@ export const cardTemplate = (name, media) => {
   card.classList.add("card");
   card.setAttribute("tabIndex", "0");
   card.setAttribute("id", media.id);
-  card.title = `Voir ${media.title}`;
 
   // get img src
   let imgsrc = "";
@@ -20,6 +19,7 @@ export const cardTemplate = (name, media) => {
 
   //img
   const imgContainer = document.createElement("div");
+  imgContainer.title = `Voir ${media.title}`;
   imgContainer.classList.add("imgContainer");
   let img;
   if (!isvideo) {
@@ -44,7 +44,7 @@ export const cardTemplate = (name, media) => {
   title.innerHTML = media.title;
   const likes = document.createElement("p");
   likes.classList.add("likes");
-  likes.innerHTML = `<span class="likesCount">${media.likes}</span> <i class="fa-solid fa-heart"></i>`;
+  likes.innerHTML = `<span class="likesCount">${media.likes}</span> <i class="fa-solid fa-heart" title="J'aime"></i>`;
 
   //construction
   card.appendChild(imgContainer);

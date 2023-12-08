@@ -120,7 +120,11 @@ const sortMedia = (filterValue) => {
     .sort((a, b) => {
       switch (filterValue) {
         case "popularity":
-          return b.likes - a.likes;
+          const card_a = media.filter((card) => +card.id === a.id)[0];
+          const card_b = media.filter((card) => +card.id === b.id)[0];
+          const likes_a = card_a.querySelector(".likesCount");
+          const likes_b = card_b.querySelector(".likesCount");
+          return Number(likes_b.innerHTML) - Number(likes_a.innerHTML);
         case "date":
           const dateA = new Date(a.date);
           const dateB = new Date(b.date);
