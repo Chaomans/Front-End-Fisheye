@@ -95,9 +95,10 @@ async function displayData({
 
   // stats
   const allLikes = document.querySelector(".stats .likes");
-  allLikes.innerHTML = `${media.reduce((acc, media) => acc + media.likes, 0)} ${
-    allLikes.innerHTML
-  }`;
+  allLikes.innerHTML = `<span id="allLikesCount">${media.reduce(
+    (acc, media) => acc + media.likes,
+    0
+  )}</span> ${allLikes.innerHTML}`;
 
   const pricing = document.querySelector(".stats .price");
   pricing.innerHTML = `${price}€ / jour`;

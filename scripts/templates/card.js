@@ -44,7 +44,7 @@ export const cardTemplate = (name, media) => {
   title.innerHTML = media.title;
   const likes = document.createElement("p");
   likes.classList.add("likes");
-  likes.innerHTML = `${media.likes} <i class="fa-solid fa-heart"></i>`;
+  likes.innerHTML = `<span class="likesCount">${media.likes}</span> <i class="fa-solid fa-heart"></i>`;
 
   //construction
   card.appendChild(imgContainer);
@@ -61,9 +61,17 @@ export const cardTemplate = (name, media) => {
     if (["ArrowRight", "ArrowDown"].includes(e.code)) {
       card.nextElementSibling?.focus();
     }
-    if (["Space", "Enter"].includes(e.code)) {
-      //TODO
+    if (["Enter"].includes(e.code)) {
+      imgContainer.click();
     }
+  });
+
+  const likesIcon = likes.querySelector("i");
+  likesIcon.addEventListener("click", () => {
+    const likesCount = card.querySelector(".likesCount");
+    const allLikes = document.querySelector("#allLikesCount");
+    likesCount.innerHTML = +likesCount.innerHTML + 1;
+    allLikes.innerHTML = +allLikes.innerHTML + 1;
   });
 
   img.addEventListener("contextmenu", (e) => {

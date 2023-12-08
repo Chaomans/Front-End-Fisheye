@@ -4,7 +4,7 @@ export class Lightbox {
   static init() {
     const cards = document.querySelectorAll(".card");
     cards.forEach((card, i) => {
-      card.addEventListener("click", () => {
+      card.firstElementChild.addEventListener("click", () => {
         const media = card.firstElementChild.firstElementChild;
         if (media.tagName === "VIDEO") {
           new Lightbox(media.firstElementChild.src, i, true);
