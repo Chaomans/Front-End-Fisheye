@@ -22,10 +22,9 @@ export class Lightbox {
   constructor(src, index, isvideo = false) {
     this.index = index;
     const lightbox = lightboxTemplate();
-    this.lightbox = lightbox;
     document.body.appendChild(lightbox);
+    this.lightbox = lightbox;
 
-    const imgDiv = document.querySelector(".lightbox_imgDiv");
     if (isvideo) {
       this.loadVideo(src);
     }
@@ -34,9 +33,11 @@ export class Lightbox {
     }
 
     // event
+    this.onKeyUp = this.onKeyUp.bind(this);
     const close = document.querySelector(".lightbox_close");
-    close.addEventListener("click", () => this.close(lightbox));
-
+    close.addEventListener("click", () => {
+      this.close(lightbox);
+    });
     const next = document.querySelector(".lightbox_next");
     next.addEventListener("click", () => {
       this.next();
