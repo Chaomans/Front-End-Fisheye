@@ -394,6 +394,24 @@ form textarea {
   height: 170px;
 }
 
+.formData {
+  position: relative;
+}
+
+.formData p {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  height: 18px;
+  text-align: right;
+  font-size: 18px;
+  color: #333;
+}
+
+.formData textarea::-webkit-scrollbar {
+  display: none;
+}
+
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 18px;

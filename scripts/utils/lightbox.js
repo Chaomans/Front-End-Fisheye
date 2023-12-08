@@ -22,6 +22,7 @@ export class Lightbox {
   constructor(src, index, isvideo = false) {
     this.index = index;
     const lightbox = lightboxTemplate();
+    this.lightbox = lightbox;
     document.body.appendChild(lightbox);
 
     const imgDiv = document.querySelector(".lightbox_imgDiv");
@@ -46,9 +47,7 @@ export class Lightbox {
       this.prev();
     });
 
-    window.addEventListener("keyup", (e) => {
-      this.onKeyUp(e, lightbox);
-    });
+    window.addEventListener("keyup", this.onKeyUp);
   }
 
   /**
@@ -59,13 +58,13 @@ export class Lightbox {
     lightbox.classList.add("fadeOut");
     setTimeout(() => {
       lightbox.remove();
-      document.removeEventListener("keyup", this.onKeyUp);
+      window.removeEventListener("keyup", this.onKeyUp);
     }, 500);
   }
 
-  onKeyUp(e, lightbox) {
+  onKeyUp(e) {
     if (e.code === "Escape") {
-      this.close(lightbox);
+      this.close(this.lightbox);
     }
     if (e.code === "ArrowRight") {
       this.next();

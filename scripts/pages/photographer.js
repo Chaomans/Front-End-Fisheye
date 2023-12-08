@@ -223,9 +223,11 @@ sendBtn.addEventListener("click", (e) => {
   const data = new FormData(contactForm, sendBtn);
   if (!isValid("data", data)) return;
   console.log("Data send:");
+  const dataToLog = {};
   for (const [k, v] of data.entries()) {
-    console.log(`${k}: ${v}`);
+    dataToLog[k] = v;
   }
+  console.table(dataToLog);
   contactForm.reset();
   sendBtn.disabled = true;
   closeModal();
