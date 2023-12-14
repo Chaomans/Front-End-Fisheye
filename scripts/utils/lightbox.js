@@ -94,6 +94,7 @@ export class Lightbox {
     const imgDiv = document.querySelector(".lightbox_imgDiv");
     const image = document.createElement("img");
     image.src = src;
+    image.setAttribute("alt", `Zoomed version of ${src.split("/").splice(-1)}`);
     image.onload = () => {
       imgDiv.classList.remove("loader");
       imgDiv.appendChild(image);

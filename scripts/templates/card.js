@@ -25,6 +25,7 @@ export const cardTemplate = (name, media) => {
   if (!isvideo) {
     img = document.createElement("img");
     img.setAttribute("src", imgsrc);
+    img.setAttribute("alt", `photo named as ${media.title}`);
   }
   if (isvideo) {
     img = document.createElement("video");

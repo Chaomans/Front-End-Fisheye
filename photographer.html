@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
+    <meta name="description" content="Photographer's presentation page" />
+    <title>Fisheye - photographe</title>
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
@@ -16,12 +16,13 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Fisheye - photographe</title>
+    <link href="css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
       <a href="./">
-        <img src="assets/images/logo.png" class="logo" />
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye's logo" />
       </a>
     </header>
     <main id="main">
@@ -66,7 +67,7 @@
               </li>
             </ul>
             <div class="arrows">
-              <i class="arrow">
+              <div class="arrow">
                 <svg
                   width="16"
                   height="11"
@@ -79,8 +80,8 @@
                     fill="white"
                   />
                 </svg>
-              </i>
-              <i class="arrow hidden">
+              </div>
+              <div class="arrow hidden">
                 <svg
                   width="16"
                   height="11"
@@ -93,7 +94,7 @@
                     fill="white"
                   />
                 </svg>
-              </i>
+              </div>
             </div>
           </div>
         </div>
@@ -108,7 +109,7 @@
       <div class="modal">
         <header>
           <h2>Contactez-moi<br /><span id="contactName"></span></h2>
-          <img src="assets/icons/close.svg" />
+          <img src="assets/icons/close.svg" alt="close button" />
         </header>
         <form id="contactForm" name="contact" action="#">
           <div class="formData">
