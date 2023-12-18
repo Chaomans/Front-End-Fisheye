@@ -45,7 +45,7 @@ export const cardTemplate = (name, media) => {
   title.innerHTML = media.title;
   const likes = document.createElement("p");
   likes.classList.add("likes");
-  likes.innerHTML = `<span class="likesCount">${media.likes}</span> <i class="fa-solid fa-heart" title="J'aime"></i>`;
+  likes.innerHTML = `<span class="likesCount">${media.likes}</span> <i class="fa-regular fa-heart" title="J'aime"></i> <i class="fa-solid fa-heart hidden" title="Je n'aime plus"></i>`;
 
   //construction
   card.appendChild(imgContainer);
@@ -67,13 +67,37 @@ export const cardTemplate = (name, media) => {
     }
   });
 
-  const likesIcon = likes.querySelector("i");
-  likesIcon.addEventListener("click", () => {
+  const likedIcon = likes.querySelector(".fa-solid");
+  const dislikedIcon = likes.querySelector(".fa-regular");
+
+  likedIcon.addEventListener("click", () => {
+    fadeLikeIcons(likedIcon, dislikedIcon);
+    const likesCount = card.querySelector(".likesCount");
+    const allLikes = document.querySelector("#allLikesCount");
+    likesCount.innerHTML = +likesCount.innerHTML - 1;
+    allLikes.innerHTML = +allLikes.innerHTML - 1;
+  });
+
+  dislikedIcon.addEventListener("click", () => {
+    fadeLikeIcons(dislikedIcon, likedIcon);
     const likesCount = card.querySelector(".likesCount");
     const allLikes = document.querySelector("#allLikesCount");
     likesCount.innerHTML = +likesCount.innerHTML + 1;
     allLikes.innerHTML = +allLikes.innerHTML + 1;
   });
+
+  /**
+   *
+   * @param {Element} target
+   */
+  const fadeLikeIcons = (toHide, toShow) => {
+    toHide.classList.add("fadeOutLike");
+    setTimeout(() => {
+      toHide.classList.add("hidden");
+      toHide.classList.remove("fadeOutLike");
+      toShow.classList.remove("hidden");
+    }, 150);
+  };
 
   img.addEventListener("contextmenu", (e) => {
     e.preventDefault();
