@@ -227,7 +227,8 @@ sendBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const data = new FormData(contactForm, sendBtn);
   if (!isValid("data", data)) return;
-  console.log("Data send:");
+  const photographerName = document.querySelector("h2.name");
+  console.log("Data send to " + photographerName.innerText);
   const dataToLog = {};
   for (const [k, v] of data.entries()) {
     dataToLog[k] = v;
