@@ -10,7 +10,15 @@ export function closeModal() {
   modal.classList.add("hidden");
 }
 
-const countChar = () => {
+/**
+ *
+ * @param {KeyboardEvent} e Key Pressed event
+ */
+const countChar = (e) => {
+  if (e.code === "Escape") {
+    closeModal();
+    return;
+  }
   const textarea = document.querySelector("textarea");
   count.innerText = textarea.value.replace(/[- ]/g, "").length;
 };
