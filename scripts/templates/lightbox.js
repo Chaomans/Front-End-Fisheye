@@ -16,11 +16,15 @@ export const lightboxTemplate = () => {
   imgDiv.classList.add("lightbox_imgDiv");
   imgDiv.classList.add("loader");
 
+  // title
+  const p = document.createElement("p");
+
   //construction
   lightbox.appendChild(close);
   lightbox.appendChild(prev);
   lightbox.appendChild(next);
   lightbox.appendChild(imgDiv);
+  lightbox.appendChild(p);
 
   return lightbox;
 };

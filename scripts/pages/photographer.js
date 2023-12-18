@@ -45,8 +45,8 @@ listitems.forEach((li) => {
     if (["ArrowRight", "ArrowDown"].includes(e.code)) {
       li.nextElementSibling?.focus();
     }
-    if (["Space", "Enter"].includes(e.code)) {
-      //TODO
+    if (e.code === "Enter") {
+      li.firstElementChild.click();
     }
   });
 });
